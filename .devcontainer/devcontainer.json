@@ -2,7 +2,7 @@
   "name": "COMP2030/9030 Web Dev with Apache & MySQL",
   "dockerComposeFile": "docker-compose.yml",
   "service": "web",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/workspaces/COMP2030-9030-web-dev",
   "forwardPorts": [8080],
   "customizations": {
     "vscode": {
