@@ -16,4 +16,5 @@
   u.textContent='Users: '+users.length; s.textContent='Skills: '+skills.length; o.textContent='Orders: '+orders.length;
   skillsEl.innerHTML=''; (skills||[]).forEach(s=> skills.innerHTML += `<tr><td>${s.id}</td><td>${s.title}</td><td>${s.tags.join(', ')}</td><td>${s.price}</td></tr>`);
 </script>
+
 </body></html>
