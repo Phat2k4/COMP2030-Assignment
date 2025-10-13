@@ -149,7 +149,7 @@ button{
 .chip.active{ background:#1e3a8a; color:white; border-color:#1e3a8a }
 
 /* Reviews stars */
-/* removed .stars */
+.stars{ display:flex; gap:6px }
 .star{ font-size:22px; cursor:pointer; filter:grayscale(1); opacity:.6; transition:.15s }
 .star.active{ filter:none; opacity:1 }
 
