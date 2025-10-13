@@ -14,22 +14,22 @@ const App = {
   },
   data: {
     skills: [
-      {name:"Python Programming", rating:4.9, provider:"Sarah Johnson", category:"Technology"},
-      {name:"Spanish Conversation", rating:4.2, provider:"Mike Rodriguez", category:"Languages"},
-      {name:"Graphic Design", rating:5.0, provider:"Emma Wilson", category:"Creative"},
-      {name:"Math Tutoring", rating:4.6, provider:"James Kim", category:"Academic"},
+      {name:"Python Programming", provider:"Sarah Johns", category:"Technology"},
+      {name:"English Conversation", provider:"Mike Rodriguez", category:"Languages"},
+      {name:"Graphic Design", provider:"Emma Wilson", category:"Creative"},
+      {name:"Math Tutoring", provider:"James Kim", category:"Academic"},
     ],
     requests: [
-      {title:"Math Tutoring", detail:"Calculus II help needed for upcoming exam", duration:"2 hours • 30 credits", status:"Pending"},
-      {title:"Essay Review", detail:"Psychology assignment proofreading", duration:"1 hour • 15 credits", status:"Confirmed"},
-      {title:"Guitar Lessons", detail:"Beginner guitar techniques", duration:"1.5 hours • 20 credits", status:"In Progress"},
+      {title:"Math Tutoring", detail:"Calculus II help needed for upcoming exam", duration:"2 hours", status:"Pending"},
+      {title:"Essay Review", detail:"Psychology assignment proofreading", duration:"1 hour", status:"Confirmed"},
+      {title:"Guitar Lessons", detail:"Beginner guitar techniques", duration:"1.5 hours", status:"In Progress"},
     ],
     conversations: {
-      "Sarah Johnson":[
-        {from:"them", text:"Hey Alex! Thanks for accepting my Python tutoring request. I'm really struggling with object‑oriented programming concepts."},
-        {from:"me", text:"No problem, Sarah! OOP can be tricky. Let's start with the basics — classes and objects. When would be a good time for our first session?"},
-        {from:"them", text:"Perfect! How about tomorrow at 2 PM? I'm free after my morning classes."},
-        {from:"me", text:"That works! Let's meet at the library study rooms on Level 2."}
+      "Brett":[
+        {from:"them"},
+        {from:"me"},
+        {from:"them"},
+        {from:"me"}
       ]
     }
   }
@@ -145,10 +145,6 @@ Pages.register = () => shell(`
 Pages.dashboard = () => shell(`
   <h2 class="page-title">Welcome back${App.state.user?`, ${App.state.user.name}`:''}!</h2>
   <div class="hero-balance card">
-    <div>
-      <div class="small">Current FUSSCredit Balance</div>
-      <div style="font-size:40px;font-weight:900" id="balance">${App.state.credits}</div>
-      <div class="pill">+15 this week</div>
     </div>
     <div class="flex" style="gap:10px">
       <button class="btn secondary" id="tx-history">Transaction History</button>
@@ -226,13 +222,6 @@ Pages.browse = () => shell(`
         <option>Math</option>
         <option>Design</option>
         <option>Spanish</option>
-      </select>
-    </div>
-    <div>
-      <label>Minimum Rating</label>
-      <select id="minrating">
-        <option>Any Rating</option>
-        <option>3+</option><option>4+</option><option>4.5+</option>
       </select>
     </div>
   </div>
@@ -633,29 +622,6 @@ function attachHandlers(){
       const bio = $('#pf-bio').value.trim();
       App.state.user = {...App.state.user, name:`${first} ${last}`, bio};
       saveSession(); alert('Profile saved!');
-    });
-  }
-
-  // Reviews star rating
-  $$('.stars').forEach(group=>{
-    group.addEventListener('click', (e)=>{
-      if(!e.target.classList.contains('star')) return;
-      const i = Number(e.target.dataset.i);
-      $$('.star', group).forEach((s,idx)=>{
-        if(idx < i) s.classList.add('active'); else s.classList.remove('active');
-      });
-      group.dataset.value = i;
-    });
-  });
-  const rvSubmit = $('#rv-submit');
-  if(rvSubmit){
-    rvSubmit.addEventListener('click', ()=>{
-      const vals = {};
-      $$('.stars').forEach(g=>vals[g.dataset.stars] = Number(g.dataset.value||0));
-      const text = $('#rv-text').value.trim();
-      if(Object.values(vals).some(v=>v===0)) return alert('Please rate all categories');
-      alert('Thank you for your review!');
-      location.hash = '#/reviews';
     });
   }
 }
