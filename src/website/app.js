@@ -8,7 +8,6 @@ const $$ = (sel, el=document)=>Array.from(el.querySelectorAll(sel));
 const App = {
   state: {
     user: JSON.parse(localStorage.getItem('fuss_user') || 'null'),
-    credits: Number(localStorage.getItem('fuss_credits') || '247'),
     notifications: 3,
     messages: 5,
   },
@@ -20,9 +19,9 @@ const App = {
       {name:"Math Tutoring", rating:4.6, provider:"James Kim", category:"Academic"},
     ],
     requests: [
-      {title:"Math Tutoring", detail:"Calculus II help needed for upcoming exam", duration:"2 hours • 30 credits", status:"Pending"},
-      {title:"Essay Review", detail:"Psychology assignment proofreading", duration:"1 hour • 15 credits", status:"Confirmed"},
-      {title:"Guitar Lessons", detail:"Beginner guitar techniques", duration:"1.5 hours • 20 credits", status:"In Progress"},
+      {title:"Math Tutoring", detail:"Calculus II help needed for upcoming exam", duration:"2 hours • 30 points", status:"Pending"},
+      {title:"Essay Review", detail:"Psychology assignment proofreading", duration:"1 hour • 15 points", status:"Confirmed"},
+      {title:"Guitar Lessons", detail:"Beginner guitar techniques", duration:"1.5 hours • 20 points", status:"In Progress"},
     ],
     conversations: {
       "Sarah Johnson":[
@@ -37,8 +36,7 @@ const App = {
 
 function saveSession(){
   localStorage.setItem('fuss_user', JSON.stringify(App.state.user));
-  localStorage.setItem('fuss_credits', String(App.state.credits));
-}
+  }
 
 /* ---------- Layout shell ---------- */
 function shell(content, active="dashboard"){
@@ -56,11 +54,10 @@ function shell(content, active="dashboard"){
           <a href="#/dashboard" class="${active==='dashboard'?'active':''}">Dashboard</a>
           <a href="#/browse" class="${active==='browse'?'active':''}">Browse Skills</a>
           <a href="#/profile" class="${active==='profile'?'active':''}">Profile</a>
-          <a href="#/reviews" class="${active==='reviews'?'active':''}">Reviews</a>
           <a href="#/messages" class="${active==='messages'?'active':''}">Messages</a>
           <a href="#/admin" class="${active==='admin'?'active':''}">Admin</a>
           <div class="nav-right">
-            <div class="credits">🪙 <span id="credits">${App.state.credits}</span> Credits</div>
+            <div class="points">🪙 <span id="points">${App.state.points}</span> Credits</div>
             <div class="badge gray">🔔 ${App.state.notifications}</div>
             <div class="badge">💬 ${App.state.messages}</div>
             <div class="avatar" title="${u?.name||''}">${(u?.name||'A')[0]}</div>
@@ -144,15 +141,12 @@ Pages.register = () => shell(`
 /* Dashboard */
 Pages.dashboard = () => shell(`
   <h2 class="page-title">Welcome back${App.state.user?`, ${App.state.user.name}`:''}!</h2>
-  <div class="hero-balance card">
-    <div>
-      <div class="small">Current FUSSCredit Balance</div>
-      <div style="font-size:40px;font-weight:900" id="balance">${App.state.credits}</div>
+  <div style="font-size:40px;font-weight:900" id="balance">${App.state.points}</div>
       <div class="pill">+15 this week</div>
     </div>
     <div class="flex" style="gap:10px">
       <button class="btn secondary" id="tx-history">Transaction History</button>
-      <button class="btn" id="earn-credits">+ Earn Credits</button>
+      <button class="btn" id="earn-points">+ Earn Credits</button>
     </div>
   </div>
 
@@ -179,7 +173,7 @@ Pages.dashboard = () => shell(`
       <div class="list">
         ${App.data.skills.map(s=>`
         <div class="list-item">
-          <div><div class="label">${s.provider}</div><div class="small">${s.name} • ★ ${s.rating}</div></div>
+          <div><div class="label">${s.provider}</div><div class="small">${s.name} </div></div>
           <button class="btn right" data-connect="${s.provider}">Connect</button>
         </div>`).join('')}
       </div>
@@ -228,28 +222,17 @@ Pages.browse = () => shell(`
         <option>Spanish</option>
       </select>
     </div>
-    <div>
-      <label>Minimum Rating</label>
-      <select id="minrating">
-        <option>Any Rating</option>
-        <option>3+</option><option>4+</option><option>4.5+</option>
-      </select>
     </div>
-  </div>
   <div class="hr"></div>
   <div id="skill-results" class="grid cards"></div>
 `, "browse");
 
 function renderSkillResults(){
   const q = ($('#search')?.value||'').toLowerCase();
-  const min = $('#minrating')?.value || 'Any Rating';
   const catActive = $('.chip.active')?.dataset.chip || 'All Skills';
   let items = App.data.skills.filter(s =>
     s.name.toLowerCase().includes(q) || s.provider.toLowerCase().includes(q)
   );
-  if(min !== 'Any Rating'){
-    const thr = Number(min.replace('+','')); items = items.filter(s=>s.rating>=thr);
-  }
   if(catActive !== 'All Skills'){
     items = items.filter(s => (s.category===catActive) || (catActive==="Tutoring" && /tutor/i.test(s.name)));
   }
@@ -259,7 +242,7 @@ function renderSkillResults(){
       <div class="flex" style="justify-content:space-between">
         <div>
           <div class="section-title">${s.name}</div>
-          <div class="small">by ${s.provider} • ★ ${s.rating}</div>
+          <div class="small">by ${s.provider} </div>
         </div>
         <button class="btn" onclick="location.hash='#/request?provider=${encodeURIComponent(s.provider)}&skill=${encodeURIComponent(s.name)}'">Request</button>
       </div>
@@ -433,7 +416,7 @@ Pages.reviews = () => shell(`
   <div class="row" style="margin-top:12px">
     <div class="card">
       <div class="section-title">Python Programming Session</div>
-      <div class="small">with Sarah Johnson • Completed • 2 days ago • 25 FUSSCredits</div>
+      <div class="small">with Sarah Johnson • Completed • 2 days ago • 25 FUSSs</div>
       <div class="hr"></div>
       <div class="section-title">Service Summary</div>
       <div class="card" style="background:#f8fbff">Helped Sarah understand OOP concepts including classes and inheritance.</div>
@@ -509,7 +492,7 @@ function parseParams(hash){
 function render(){
   const route = location.hash || '#/login';
   if(route.startsWith('#/logout')){
-    App.state.user = null; App.state.credits = 0; saveSession();
+    App.state.user = null; App.state.points = 0; saveSession();
     location.hash = '#/login'; return;
   }
   if(!App.state.user && !route.startsWith('#/login') && !route.startsWith('#/register')){
@@ -523,7 +506,6 @@ function render(){
   else if(route.startsWith('#/request')) { view = Pages.request(parseParams(route)); }
   else if(route.startsWith('#/messages')) view = Pages.messages();
   else if(route.startsWith('#/profile')) view = Pages.profile();
-  else if(route.startsWith('#/reviews')) view = Pages.reviews();
   else if(route.startsWith('#/admin')) view = Pages.admin();
   else view = Pages.dashboard();
   $('#app').innerHTML = view;
@@ -545,7 +527,7 @@ function attachHandlers(){
       }
       if(!pass){ alert('Enter your password'); return; }
       App.state.user = {name: email.split('@')[0].replace('.', ' ').replace(/\b\w/g,m=>m.toUpperCase()), email};
-      App.state.credits = Number(localStorage.getItem('fuss_credits') || '247');
+      App.state.points = 0;
       saveSession();
       location.hash = '#/dashboard';
     });
@@ -553,7 +535,7 @@ function attachHandlers(){
       const role = e.target.getAttribute('data-demo');
       const email = role==='student' ? 'john.smith@flinders.edu.au' : 'sarah.wilson@flinders.edu.au';
       App.state.user = {name: role==='student'?'John Smith':'Sarah Wilson', email};
-      App.state.credits = 247; saveSession();
+      App.state.points = 247; saveSession();
       location.hash = '#/dashboard';
     }));
   }
@@ -568,7 +550,7 @@ function attachHandlers(){
       const ln = $('#reg-ln').value.trim();
       if(!/@flinders\.edu\.au$/.test(email)) return alert('Use a valid @flinders.edu.au email');
       if(pass.length<4) return alert('Password must be at least 4 characters');
-      App.state.user = {name:`${fn} ${ln}`, email, bio:''}; App.state.credits = 125;
+      App.state.user = {name:`${fn} ${ln}`, email, bio:''}; App.state.points = 125;
       saveSession(); location.hash = '#/dashboard';
     });
   }
@@ -577,7 +559,6 @@ function attachHandlers(){
   if($('#skill-results')){
     renderSkillResults();
     $('#search').addEventListener('input', renderSkillResults);
-    $('#minrating').addEventListener('change', renderSkillResults);
     $$('.chip').forEach(ch=>ch.addEventListener('click', e=>{
       $$('.chip').forEach(c=>c.classList.remove('active'));
       e.currentTarget.classList.add('active');
@@ -592,15 +573,12 @@ function attachHandlers(){
     dur.addEventListener('change', ()=>{
       const hours = Number(dur.value||0);
       const rate = 15;
-      cost.value = hours ? `${hours*rate} credits` : 'Select duration';
+      cost.value = hours ? String(hours*rate) : 'Select duration';
     });
     $('#rq-submit').addEventListener('click', ()=>{
       const hours = Number(dur.value||0);
       if(!hours) return alert('Select duration');
-      const price = hours*15;
-      if(App.state.credits < price) return alert('Not enough credits');
-      App.state.credits -= price; saveSession();
-      alert(`Request submitted! ${price} credits deducted.`);
+      alert('Request submitted!');
       location.hash = '#/dashboard';
     });
   }
@@ -637,11 +615,7 @@ function attachHandlers(){
   }
 
   // Reviews star rating
-  $$('.stars').forEach(group=>{
-    group.addEventListener('click', (e)=>{
-      if(!e.target.classList.contains('star')) return;
-      const i = Number(e.target.dataset.i);
-      $$('.star', group).forEach((s,idx)=>{
+  $$('.star', group).forEach((s,idx)=>{
         if(idx < i) s.classList.add('active'); else s.classList.remove('active');
       });
       group.dataset.value = i;
@@ -651,7 +625,6 @@ function attachHandlers(){
   if(rvSubmit){
     rvSubmit.addEventListener('click', ()=>{
       const vals = {};
-      $$('.stars').forEach(g=>vals[g.dataset.stars] = Number(g.dataset.value||0));
       const text = $('#rv-text').value.trim();
       if(Object.values(vals).some(v=>v===0)) return alert('Please rate all categories');
       alert('Thank you for your review!');

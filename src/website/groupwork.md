@@ -4,11 +4,9 @@
 ### Contribution: 
 - nguy1687 and shi0326: HTML, CSS, JS: we have built a frontend website.
  - website
-       - css
-           - style.css
-       - js
-           - app.js
-       - index.html 
+    - css: style.css
+    - js: app.js
+    - index.html** 
 - baru0035: PHP and SQL:he has built a backend
 - nort0191 and call0186: they did not do eveything.
 ### Note:
