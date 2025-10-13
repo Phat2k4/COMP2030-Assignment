@@ -619,8 +619,7 @@ function attachHandlers(){
         if(idx < i) s.classList.add('active'); else s.classList.remove('active');
       });
       group.dataset.value = i;
-    });
-  });
+    }
   const rvSubmit = $('#rv-submit');
   if(rvSubmit){
     rvSubmit.addEventListener('click', ()=>{
@@ -631,7 +630,7 @@ function attachHandlers(){
       location.hash = '#/reviews';
     });
   }
-}
+
 
 window.addEventListener('hashchange', render);
 window.addEventListener('load', render);
