@@ -114,4 +114,24 @@ Skill browsing is now more informative and trustworthy, and the dashboard provid
 ### Script
 Welcome to FUSS testing. WE are really need you feedback to update and developt a new version that bring better experience. In process, you will fill a short questionnaire first, then 5 tasks with rating after each. 
 ### Pre-test and Post-test Questionnaire.
+https://github.com/Phat2k4/COMP2030-Assignment/blob/main/p1-p3/ux-evaluation-part3/FUSS%20UX%20Evaluation%20Form.docx
+### Data captured
+1. SEQ
+![alt text](image-1.png)
+
+2. SUS
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+
+
+
+
 
