@@ -53,9 +53,65 @@ Participants will perform five core tasks that cover both the front-end interfac
 | **Errors** | ≤1/user
 ## Testing Summary and Analysis
 ## Iteration Description
+1. Credit System
 ![alt text](credits.png)
-![alt text](Dashboard.png)
-![alt text](skill.png)
+
+- Issue:
+Participants noticed that credit balances sometimes displayed incorrect totals after booking or completing a session. Some users refreshed the page to see updates, and the credit purpose was unclear for new users.
+
+- Change Implement:
+All credit operations update to use MySQL transactions with commit and rollback protection to prevent duplicate or failed deductions. The frontend enhance with real-time AJAX updates so the credit balance refreshes instantly after each transaction.
+Tooltips and contextual messages (“You earned 20 credits from teaching!” or “15 credits deducted for session booking”) were added for transparency.
+
+- Impact:
+Users now see accurate, instant credit changes and understand how the credit system works. Transaction reliability and backend security improved significantly.
+
+2. Messaging System
+
+![alt text](messages.png)
+
+- Issue:
+The original messaging interface allowed only plain-text messages. Users requested a more interactive and modern chat experience, including group messaging, file sharing, and expressive communication options.
+
+- Change Implement:
+The messaging module refactor to support group chat creation with a “+ New Group” button. It could Upload (file, image, and link) using PHP file handling with storage path verification to prevent unsafe file types.
+The messaging could add stickers  an open-source emoji picker (emoji-mart).
+
+- Impact:
+Communication became richer and more collaborative, especially for group study and multi-user tutoring sessions. The interface remains clean while providing modern chat features users expect.
+
+3. Profile Management
+
 ![alt text](profile.png)
+
+- Issue:
+Participants wanted to personalise their profiles with more context, such as profile pictures, skill portfolios, and academic background, to improve trust between users.
+
+- Change Implement:
+The profile system upgrad with image upload functionality (JPEG/PNG validation, 2 MB limit) and server-side sanitization.
+New parts need to update for academic information such as (degree, major, year level) and skill portfolio links (GitHub, LinkedIn, or personal websites).
+The layout will add more with clear sections (“Personal Info,” “Academic Info,” “Portfolio”) to provide personal information.
+
+- Impact:
+Profiles provide a more complete and credible representation of each user, fostering trust and professionalism in skill exchanges.
+
+4. Skill Browsing & Dashboard
+
+![alt text](Dashboard.png)
+
+![alt text](skill.png)
+
+- Issue:
+In the skill browsing section, users could see skill cards but lacked details about the helper (e.g., experience or verification). The dashboard also felt underutilized and was limited to system metrics.
+
+- Change Implement:
+Each skill card now includes a “View Helper Profile” button that opens a modal showing the helper’s bio, academic info, and average review rating. This transparency helps users choose reliable tutors.
+The Dashboard expand to include a “Career & Opportunities” section that aggregates internship and job links from the university’s careers API. This enhances the platform’s relevance to students’ real-world goals.
+
+- Impact:
+Skill browsing is now more informative and trustworthy, and the dashboard provides meaningful content beyond statistics—encouraging continuous platform engagement.
 ## Appendix
+### Script
+Welcome to FUSS testing. WE are really need you feedback to update and developt a new version that bring better experience. In process, you will fill a short questionnaire first, then 5 tasks with rating after each. 
+### Pre-test and Post-test Questionnaire.
 
