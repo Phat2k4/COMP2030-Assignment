@@ -52,6 +52,25 @@ Participants will perform five core tasks that cover both the front-end interfac
 | **Time-on-Task** | ≤60s avg |
 | **Errors** | ≤1/user
 ## Testing Summary and Analysis
+In this part, we will test the usability of the website. After testing the process and outcomes will be provide the key findings, pain points and areas of success. After that will be trying to solve the usability issues that found from the website and provide solutions. During testing the website, there are some usability issues that have been found out which is visual hierarchy issues, UI issues and insufficient contrast. 
+
+ 
+
+While testing the website we let the tester first using registration system to create an account and login to the website, and then we guide the tester go to the profile page to test the profile management system which the user can change the detail of their profile include name, email address and bio. 
+![alt text](register.png)
+Next, the tester goes to the dashboard to test the main service of the website which has requested and review the course that has been selected. In the dashboard the tester can easily see the course that can select in the middle of the page with the name of the teacher who is support of the course and stars to represent the feedback of the teacher, user can also click on the “Browse all skills” to see all the other course and know the credit system which the user need spend credit to request for a service. 
+![alt text](dashboard.png)
+After that we also let the tester go to the “reviews” page to test the score system in which the user can rank a score of stars as if the user is satisfied with the service or not. The tester suggests creating a link with the request and reviews page so that the user can easily jump to reviews page from the request page without clicking on the reviews on the menu on the top of the website page. 
+![alt text](reviews.png)
+Finally, the tester goes to the message page and tests the message sending and checking. The tester is satisfied with this page as it clearly shows who the user is talking to and able to see what course the teacher is good at and how many stars on it. Overall, the testers are satisfied while using the website and there are still some places that need some changes to make the website more convenient such as creating jumping that connect to each page. 
+![alt text](message.png)
+
+ 
+
+There are some usability issues that have been found during website testing. 
+![alt text](menu.png)
+First is the visual hierarchy issue. There are some icons that lack descriptive labels or tooltips, users may not understand the meaning of each icon. For example, the user may not understand the bell icon represents notification or message, and the size of the icon is small which makes it difficult for the user difficult to identify immediately. The best way to do it is while the user put mouse on the icon of a while, and it will show “notification” to tell the user this is the notification button and will tell the user how many notifications he got. 
+![alt text](reviews.png)The next one is UI issues, some icon on the menu makes the word change line such as “Browse skills”, “Credits” and “Log out” and it;s suppose to be in one line. The best way to solve it is to give bigger size of space of each icon or make the word smaller. The last one is the insufficient contrast. While testing the website the tester mention that while ranking on the “reviews” page the stars is turn grey into black which makes it not easy to see if the user is successfully ranked or not. To change it the best way to do is to change color of the star from black to yellow or red. 
 ## Iteration Description
 1. Credit System
 ![alt text](credits.png)
@@ -110,26 +129,7 @@ The Dashboard expand to include a “Career & Opportunities” section that aggr
 
 - Impact:
 Skill browsing is now more informative and trustworthy, and the dashboard provides meaningful content beyond statistics—encouraging continuous platform engagement.
-## Testing Summary and Analysis
-In this part, we will test the usability of the website. After testing the process and outcomes will be provide the key findings, pain points and areas of success. After that will be trying to solve the usability issues that found from the website and provide solutions. During testing the website, there are some usability issues that have been found out which is visual hierarchy issues, UI issues and insufficient contrast. 
-
- 
-
-While testing the website we let the tester first using registration system to create an account and login to the website, and then we guide the tester go to the profile page to test the profile management system which the user can change the detail of their profile include name, email address and bio. 
-![alt text](register.png)
-Next, the tester goes to the dashboard to test the main service of the website which has requested and review the course that has been selected. In the dashboard the tester can easily see the course that can select in the middle of the page with the name of the teacher who is support of the course and stars to represent the feedback of the teacher, user can also click on the “Browse all skills” to see all the other course and know the credit system which the user need spend credit to request for a service. 
-![alt text](dashboard.png)
-After that we also let the tester go to the “reviews” page to test the score system in which the user can rank a score of stars as if the user is satisfied with the service or not. The tester suggests creating a link with the request and reviews page so that the user can easily jump to reviews page from the request page without clicking on the reviews on the menu on the top of the website page. 
-![alt text](reviews.png)
-Finally, the tester goes to the message page and tests the message sending and checking. The tester is satisfied with this page as it clearly shows who the user is talking to and able to see what course the teacher is good at and how many stars on it. Overall, the testers are satisfied while using the website and there are still some places that need some changes to make the website more convenient such as creating jumping that connect to each page. 
-![alt text](message.png)
-
- 
-
-There are some usability issues that have been found during website testing. 
-![alt text](menu.png)
-First is the visual hierarchy issue. There are some icons that lack descriptive labels or tooltips, users may not understand the meaning of each icon. For example, the user may not understand the bell icon represents notification or message, and the size of the icon is small which makes it difficult for the user difficult to identify immediately. The best way to do it is while the user put mouse on the icon of a while, and it will show “notification” to tell the user this is the notification button and will tell the user how many notifications he got. 
-![alt text](reviews.png)The next one is UI issues, some icon on the menu makes the word change line such as “Browse skills”, “Credits” and “Log out” and it;s suppose to be in one line. The best way to solve it is to give bigger size of space of each icon or make the word smaller. The last one is the insufficient contrast. While testing the website the tester mention that while ranking on the “reviews” page the stars is turn grey into black which makes it not easy to see if the user is successfully ranked or not. To change it the best way to do is to change color of the star from black to yellow or red. ## Appendix
+## Appendix
 ### Script
 Welcome to FUSS testing. WE are really need you feedback to update and developt a new version that bring better experience. In process, you will fill a short questionnaire first, then 5 tasks with rating after each. 
 ### Pre-test and Post-test Questionnaire.
